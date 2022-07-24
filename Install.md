@@ -10,7 +10,9 @@ as part of a standardised environment.  Resources should include:
   RABBITMQ  
 With interconnects between them and a local drive shared across windows-wsl2 and the  
 container.
-We also need to have the GIT credentials available to wsl2 for cloning._  
+We also need to have the GIT credentials available to wsl2 for cloning  
+Dev setup between Mac, Windows and Linux will differ -> but the docker-compose  
+environments should just work._  
 
 
 ## Activate wsl2  
@@ -66,10 +68,26 @@ _Install versioned docker-compose_
 
 _We need to run dockerd detached from the controlling terminal_  
 `sudo dockerd </dev/null &>/dev/null &`  
-
+OR we can have it autostart by adding it to our profile:  
+`vi ~/.profile`  
+Adding the following to the end of the file:  
+```
+if service docker status 2>&1 | grep -q "is not running"; then
+    wsl.exe -d "${WSL_DISTRO_NAME}" -u root -e /usr/sbin/service docker start >/dev/null 2>&1
+fi
+```
+For changes to take effect you'll have to close and reopen your shell
 
 ## Run any docker container  
 _Cliché example_  
 `sudo docker run hello-world`
 
-
+## Working practice    
+Recommended working practice is to work from wsl2 while linking to your %userprofile% in the windows subsystem.  
+Windows home is mounted in /mnt/c/{username}.  
+Mine is /mnt/c/Users/fistr  
+Recommended practice is to create a workspace folder in windows and add an alias to that folder  
+`echo 'alias workspace="cd /mnt/c/Users/fistr/workspace"' >> ~/.bash_aliases`  
+then reload bash  
+'exec bash -l'
+(this assumes the standard .bashrc is still there -> if not copy it from `/etc/skel`  
