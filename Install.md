@@ -32,6 +32,9 @@ _now_
 _from command prompt_  
 `wsl --set-version Ubuntu 2`  
 
+
+
+
 ## Install Docker & Docker-compose on Ubuntu  
 **We won't use the convenience script from get.docker.com so we can understand what is going on.**  
 _Refresh and install packages_  
@@ -82,7 +85,24 @@ For changes to take effect you'll have to close and reopen your shell
 _Cliché example_  
 `sudo docker run hello-world`
 
+## share windows SSL config  
+You can setup ssl in linux, or just copy your existing windows setup over.   Ubuntu comes with ssh pre-installed  
+```
+cp -r /mnt/c/Users/fistr/.ssh ~/.ssh
+chmod 600 ~/.ssh/id_rsa
+```
+
+## share git config  
+You can setup git in linux, or just copy your existing windows setup over.  Ubuntu comes with git pre-installed     
+```
+cp -r /mnt/c/Users/fistr/.gitconfig ~/.gitconfig 
+chmod 600 ~/.gitconfig
+```
+
+
 ## Working practice    
+What I want to be able to do is run intellij from within wsl2: unfortunately if you have a high res display it looks rubbish :-(
+The following is a nice way of sharing your home folder - it is by no means necessary
 Recommended working practice is to work from wsl2 while linking to your %userprofile% in the windows subsystem.  
 Windows home is mounted in /mnt/c/{username}.  
 Mine is /mnt/c/Users/fistr  
@@ -91,3 +111,30 @@ Recommended practice is to create a workspace folder in windows and add an alias
 then reload bash  
 'exec bash -l'
 (this assumes the standard .bashrc is still there -> if not copy it from `/etc/skel`  
+
+# Optional
+## Install IntelliJ in wsl2 
+The biggest issue we have is that the display will look awful if you have a high dpi advice -> also window management is bad... but it appears to be the fault of linux: even if you install the vGPU driver listed below
+https://docs.microsoft.com/en-us/windows/wsl/tutorials/gui-apps
+You can create a .wslgconfig in C:\ProgramData\Microsoft\WSL\ to see what it looks like
+```
+[system-distro-env]
+WESTON_RDP_DISABLE_FRACTIONAL_HI_DPI_SCALING=false
+WESTON_RDP_DEBUG_DESKTOP_SCALING_FACTOR=150
+```
+
+If you do wish intellij...
+_need to install chrome first to approve licence - sigh_
+```
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt install --fix-broken -y
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+google-chrome >/dev/null 2>&1 &
+
+sudo add-apt-repository ppa:mmk2410/intellij-idea -y
+sudo apt install intellij-idea-ultimate -y
+```
+
+LETS GO HAVE A LOOK HERE FOR SCALING FUN  https://www.dedoimedo.com/computers/lenovo-ideapad-y50-kubuntu.html
