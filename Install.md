@@ -24,7 +24,7 @@ wsl --set-default-version 2
 ```
 
 _now_  
-  1.  install ubuntu from the store  
+  1.  install ubuntu from the store (pick a versioned one e.g.20.04.5 LTS)
   2.  open the ubuntu app  
   3.  set username and password  (e.g. fistralpro fistralpro)  
   4.  close the ubuntu app  
