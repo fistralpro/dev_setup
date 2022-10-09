@@ -125,7 +125,7 @@ java 8
 sudo apt install openjdk-8-jre-headless -y
 sudo apt-get install openjdk-8-jdk -y
 java -version
-export JAVA_HOME=/usr/lib/jvm/openjdk-8-jdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 ```
 install gradle  
