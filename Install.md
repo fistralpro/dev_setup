@@ -146,6 +146,26 @@ Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -I
 To speed up work you can exclude wsl folder from windows virus scan - add exclusion (\\wsl$\Ubuntu)
 to debug you will need to create a firewall rule with powershell....  maybe instructions on intellij site
 
+## test java + gradle + docker work together
+Create a simple spring app - Open IntelliJ create new project ("demo") in wsl folder.  Ensure all settings point to 8  
+```
+gradle init
+#Project=Application 
+#Implementation=Java
+#Split functionality=No
+#Build script DSL=Groovy
+#Unit testing=Junit 4
+#project name=demo
+#source package=demo
+gradle wrapper
+./gradlew run
+./gradlew build
+```
+
+note vscode from wsl2 is fine... but intellij is aweful  
+going to try one more time to run intellij from wsl2  
+
 # Notes
 ## Install IntelliJ in wsl2 
 I did do this, but it suffered from performance issues and window scaling problems (hdpi screens)
+
