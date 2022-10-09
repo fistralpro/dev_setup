@@ -38,8 +38,10 @@ Setup instructions here https://sourceforge.net/p/vcxsrv/wiki/Using%20VcXsrv%20W
 Ensure you
 In wsl2 (ubuntu)
 ```
-vi ~/.bashrc
+sudo apt install -y xfce4 xfce4-goodies
+#pick lightdm
 
+vi ~/.bashrc
 # write these lines at bottom 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 >> ~/.bashrc
 export LIBGL_ALWAYS_INDIRECT=1
@@ -128,6 +130,12 @@ java -version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 ```
+and for intellij we need a higher JRE, we'll install the jdk and the jre
+```
+sudo apt install -y openjdk-17-jdk openjdk-17-jre
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+```
+
 install gradle  
 ```
 VERSION=7.5.1
@@ -154,6 +162,14 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 google-chrome >/dev/null 2>&1 &
 sudo add-apt-repository ppa:mmk2410/intellij-idea -y
 sudo apt install intellij-idea-ultimate -y
+```
+
+I had scaling issues so needed to change idea64.vmoptions (help:Edit Custom VM Options)  
+```
+-Xmx977m
+-Dsun.java2d.uiScale.enabled=true
+-Dide.ui.scale==2.0
+-Dsun.java2d.uiScale=2.0
 ```
 
 
