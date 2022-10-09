@@ -41,13 +41,13 @@ In wsl2 (ubuntu)
 vi ~/.bashrc
 
 # write these lines at bottom 
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 ?? ~/.bashrc
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 >> ~/.bashrc
 export LIBGL_ALWAYS_INDIRECT=1
 sudo /etc/init.d/dbus start &> /dev/null
 # endfile
 
-source ~/.bashrc
 echo ${USER}' All = (root) NOPASSWD: /etc/init.d/dbus' > /etc/sudoers.d/dbus
+source ~/.bashrc
 ```
 If you have any problems with this, ensure "disable access control" is checked in vcxsrv, and check your firewall rules (you may need to google)
 
