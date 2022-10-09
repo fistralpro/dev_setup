@@ -134,6 +134,17 @@ gradle -v
 To use lxfs (rather than NTFS) we need to work from the wsl home directory (not the mounted share).  This is ~  
 You will need to point your jdk, jre and gradle at the wsl installs .
 You will also need to turn your virus checker from examining wsl or there is a significant performance hit.   
+Change your intellij settings Build, Execution, Deployment>Build tools>Gradle>Gradle user home:/home/fistralpro/.gradle  
+Set your project settings to read from WSL
+
+turn off the firewall (powershell administrator mode)  
+```
+New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
+Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
+```
+  
+To speed up work you can exclude wsl folder from windows virus scan - add exclusion (\\wsl$\Ubuntu)
+to debug you will need to create a firewall rule with powershell....  maybe instructions on intellij site
 
 # Notes
 ## Install IntelliJ in wsl2 
