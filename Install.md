@@ -32,8 +32,24 @@ _now_
 _from command prompt_  
 `wsl --set-version Ubuntu 2`  
 
+## Install xwindow client (vcxsrv)
+Download vcxsrv from sourceforge https://sourceforge.net/projects/vcxsrv/  
+Setup instructions here https://sourceforge.net/p/vcxsrv/wiki/Using%20VcXsrv%20Windows%20X%20Server/
+Ensure you
+In wsl2 (ubuntu)
+```
+vi ~/.bashrc
 
+# write these lines at bottom 
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 ?? ~/.bashrc
+export LIBGL_ALWAYS_INDIRECT=1
+sudo /etc/init.d/dbus start &> /dev/null
+# endfile
 
+source ~/.bashrc
+echo ${USER}' All = (root) NOPASSWD: /etc/init.d/dbus' > /etc/sudoers.d/dbus
+```
+If you have any problems with this, ensure "disable access control" is checked in vcxsrv, and check your firewall rules (you may need to google)
 
 ## Install Docker & Docker-compose on Ubuntu  
 **We won't use the convenience script from get.docker.com so we can understand what is going on.**  
@@ -128,23 +144,18 @@ sudo chmod +x /etc/profile.d/gradle.sh
 source /etc/profile.d/gradle.sh
 gradle -v
 ```
-
-
-## Working practice    
-To use lxfs (rather than NTFS) we need to work from the wsl home directory (not the mounted share).  This is ~  
-You will need to point your jdk, jre and gradle at the wsl installs .
-You will also need to turn your virus checker from examining wsl or there is a significant performance hit.   
-Change your intellij settings Build, Execution, Deployment>Build tools>Gradle>Gradle user home:/home/fistralpro/.gradle  
-Set your project settings to read from WSL
-
-turn off the firewall (powershell administrator mode)  
+## Install intellij on wsl2
+You need chrome for the license... and for cucumber eventually
 ```
-New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow
-Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike "IntelliJ IDEA*" | Disable-NetFirewallRule
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt install --fix-broken -y
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+google-chrome >/dev/null 2>&1 &
+sudo add-apt-repository ppa:mmk2410/intellij-idea -y
+sudo apt install intellij-idea-ultimate -y
 ```
-  
-To speed up work you can exclude wsl folder from windows virus scan - add exclusion (\\wsl$\Ubuntu)
-to debug you will need to create a firewall rule with powershell....  maybe instructions on intellij site
+
 
 ## test java + gradle + docker work together
 Create a simple spring app - Open IntelliJ create new project ("demo") in wsl folder.  Ensure all settings point to 8  
@@ -162,10 +173,4 @@ gradle wrapper
 ./gradlew build
 ```
 
-note vscode from wsl2 is fine... but intellij is aweful  
-going to try one more time to run intellij from wsl2  
-
-# Notes
-## Install IntelliJ in wsl2 
-I did do this, but it suffered from performance issues and window scaling problems (hdpi screens)
 
