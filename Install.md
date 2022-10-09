@@ -98,43 +98,43 @@ You can setup git in linux, or just copy your existing windows setup over.  Ubun
 cp -r /mnt/c/Users/fistr/.gitconfig ~/.gitconfig 
 chmod 600 ~/.gitconfig
 ```
+## Optional useful packages
+```
+sudo apt install unzip
+```
+
+## optional install java 8 on ubuntu
+java 8  
+```
+sudo apt install openjdk-8-jre-headless -y
+sudo apt-get install openjdk-8-jdk -y
+java -version
+export JAVA_HOME=/usr/lib/jvm/openjdk-8-jdk
+export PATH=$PATH:$JAVA_HOME/bin
+```
+install gradle  
+```
+VERSION=7.5.1
+wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
+sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+
+sudo vi /etc/profile.d/gradle.sh
+# file contents
+#!
+export GRADLE_HOME=/opt/gradle/latest
+export PATH=${GRADLE_HOME}/bin:${PATH}
+# end of file
+sudo chmod +x /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh
+gradle -v
+```
 
 
 ## Working practice    
-What I want to be able to do is run intellij from within wsl2: unfortunately if you have a high res display it looks rubbish :-(
-The following is a nice way of sharing your home folder - it is by no means necessary
-Recommended working practice is to work from wsl2 while linking to your %userprofile% in the windows subsystem.  
-Windows home is mounted in /mnt/c/{username}.  
-Mine is /mnt/c/Users/fistr  
-Recommended practice is to create a workspace folder in windows and add an alias to that folder  
-`echo 'alias workspace="cd /mnt/c/Users/fistr/workspace"' >> ~/.bash_aliases`  
-then reload bash  
-'exec bash -l'
-(this assumes the standard .bashrc is still there -> if not copy it from `/etc/skel`  
+To use lxfs (rather than NTFS) we need to work from the wsl home directory (not the mounted share).  This is ~  
+You will need to point your jdk, jre and gradle at the wsl installs .
+You will also need to turn your virus checker from examining wsl or there is a significant performance hit.   
 
-# Optional
+# Notes
 ## Install IntelliJ in wsl2 
-The biggest issue we have is that the display will look awful if you have a high dpi advice -> also window management is bad... but it appears to be the fault of linux: even if you install the vGPU driver listed below
-https://docs.microsoft.com/en-us/windows/wsl/tutorials/gui-apps
-You can create a .wslgconfig in C:\ProgramData\Microsoft\WSL\ to see what it looks like
-```
-[system-distro-env]
-WESTON_RDP_DISABLE_FRACTIONAL_HI_DPI_SCALING=false
-WESTON_RDP_DEBUG_DESKTOP_SCALING_FACTOR=150
-```
-
-If you do wish intellij...
-_need to install chrome first to approve licence - sigh_
-```
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-sudo apt install --fix-broken -y
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-google-chrome >/dev/null 2>&1 &
-
-sudo add-apt-repository ppa:mmk2410/intellij-idea -y
-sudo apt install intellij-idea-ultimate -y
-```
-
-LETS GO HAVE A LOOK HERE FOR SCALING FUN  https://www.dedoimedo.com/computers/lenovo-ideapad-y50-kubuntu.html
+I did do this, but it suffered from performance issues and window scaling problems (hdpi screens)
