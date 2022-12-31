@@ -1,17 +1,17 @@
 #!/bin/bash
-# installs openjdk17
-# sudo bash java17.sh
+# Ubuntu install of eclipse temurin (other recommended is Amazon Corretto)
+# instructions from: https://adoptium.net/installation/linux/
+# run with
+#    sudo bash java17.sh
 [[ "$EUID" -ne 0 ]] && echo "This script must be run as root" && exit 1
 
-sudo apt install libc6-i386 libc6-x32 curl -y
-cd /tmp
-curl  -O https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-tar -xvf jdk-17_linux-x64_bin.tar.gz
-sudo mv jdk-17.* /opt/jdk17
-export JAVA_HOME=/opt/jdk17
-export PATH=$PATH:$JAVA_HOME/bin
+apt install -y wget apt-transport-https
 
-echo "Installed:"
-java --version
-echo $JAVA_HOME
+mkdir -p /etc/apt/keyrings
+wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc
+
+echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+
+apt update 
+apt install temurin-17-jdk
 
