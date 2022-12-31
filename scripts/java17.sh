@@ -1,5 +1,5 @@
 #!/bin/bash
-# Ubuntu install of eclipse temurin (other recommended is Amazon Corretto)
+# Ubuntu 20.04 amd64 install of eclipse temurin (other recommended is Amazon Corretto)
 # instructions from: https://adoptium.net/installation/linux/
 # run with
 #    sudo bash java17.sh
@@ -15,3 +15,13 @@ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.n
 apt update 
 apt install temurin-17-jdk
 
+export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+
+echo "Installed:"
+java --version
+echo $JAVA_HOME
+
+echo "Any issues you may have multiple versions of java"
+echo "You may want to try selecting the version with: "
+echo "     sudo update-alternatives --config java"
