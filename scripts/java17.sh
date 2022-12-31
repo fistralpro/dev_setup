@@ -15,8 +15,9 @@ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.n
 apt update 
 apt install temurin-17-jdk
 
-export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
-export PATH=$PATH:$JAVA_HOME/bin
+echo "export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64" >> ~/.bashrc
+echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
+source ~/.bashrc 
 
 echo "Installed:"
 java --version
