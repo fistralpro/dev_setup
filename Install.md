@@ -138,11 +138,9 @@ java -version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 ```
-and for intellij we need a higher JRE, we'll install the jdk and the jre
-```
-sudo apt install -y openjdk-17-jdk openjdk-17-jre
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-```
+## optional install java 17 on ubuntu
+
+see scripts/java17.sh
 
 install gradle  
 ```
@@ -160,41 +158,4 @@ sudo chmod +x /etc/profile.d/gradle.sh
 source /etc/profile.d/gradle.sh
 gradle -v
 ```
-## Install intellij on wsl2
-You need chrome for the license... and for cucumber eventually
-```
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-sudo apt install --fix-broken -y
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-google-chrome >/dev/null 2>&1 &
-sudo add-apt-repository ppa:mmk2410/intellij-idea -y
-sudo apt install intellij-idea-ultimate -y
-```
-
-I had scaling issues so needed to change idea64.vmoptions (help:Edit Custom VM Options)  
-```
--Xmx977m
--Dsun.java2d.uiScale.enabled=true
--Dide.ui.scale==2.0
--Dsun.java2d.uiScale=2.0
-```
-
-
-## test java + gradle + docker work together
-Create a simple spring app - Open IntelliJ create new project ("demo") in wsl folder.  Ensure all settings point to 8  
-```
-gradle init
-#Project=Application 
-#Implementation=Java
-#Split functionality=No
-#Build script DSL=Groovy
-#Unit testing=Junit 4
-#project name=demo
-#source package=demo
-gradle wrapper
-./gradlew run
-./gradlew build
-```
-
 
