@@ -2,7 +2,7 @@
 # Ubuntu 20.04 amd64 install of eclipse temurin (other recommended is Amazon Corretto)
 # instructions from: https://adoptium.net/installation/linux/
 # run with
-#    sudo bash java17.sh
+#    ./java17.sh
 
 echo "install apt-transport-https"
 sudo pt install -y wget apt-transport-https
@@ -19,7 +19,7 @@ sudo apt update
 sudo apt install temurin-17-jdk
 
 echo "export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64" >> ~/.bashrc
-echo 'export PATH="$PATH":$JAVA_HOME/bin' >> ~/.bashrc
+echo 'export PATH="$PATH":/usr/lib/jvm/temurin-17-jdk-amd64/bin' >> ~/.bashrc
 source ~/.bashrc 
 
 echo "Installed:"
