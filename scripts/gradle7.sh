@@ -15,5 +15,7 @@ echo "export GRADLE_HOME=/opt/gradle/latest" > /etc/profile.d/gradle.sh
 echo 'export PATH=/opt/gradle/latest/bin:"${PATH}"' >> /etc/profile.d/gradle.sh
 chmod +x /etc/profile.d/gradle.sh
 
-source /etc/profile.d/gradle.sh
-gradle --v
+echo "To use gradle immediately you will need to source the file with:"
+echo "source /etc/profile.d/gradle.sh"
+echo ""
+echo "alternatively gradle.sh with be picked up on restart"
