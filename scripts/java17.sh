@@ -19,7 +19,7 @@ sudo apt update
 sudo apt install temurin-17-jdk
 
 echo "export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64" >> ~/.bashrc
-echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
+echo 'export PATH="$PATH":$JAVA_HOME/bin' >> ~/.bashrc
 source ~/.bashrc 
 
 echo "Installed:"
