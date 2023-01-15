@@ -3,7 +3,6 @@
 # instructions from: https://gradle.org/install/
 # run with
 #    sudo bash gradle7.sh
-[[ "$EUID" -ne 0 ]] && echo "This script must be run as root" && exit 1
 
 VERSION=7.6
 
