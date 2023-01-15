@@ -12,7 +12,7 @@ unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
 
 ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
 echo "export GRADLE_HOME=/opt/gradle/latest" > /etc/profile.d/gradle.sh
-echo "export PATH=/opt/gradle/latest/bin:${PATH}" >> /etc/profile.d/gradle.sh
+echo 'export PATH=/opt/gradle/latest/bin:"${PATH}"' >> /etc/profile.d/gradle.sh
 chmod +x /etc/profile.d/gradle.sh
 
 source /etc/profile.d/gradle.sh
