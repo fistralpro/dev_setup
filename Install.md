@@ -99,7 +99,7 @@ chmod 600 ~/.gitconfig
 ## unblock firewall for intellij
 I was unable to get online examples to work, so instead I manually added idea64.ex the rules via windows defender firewall with active security  
 !Warning! Every intellij update changes the path so until you add the new update through the rules... it breaks.  
-![intellij firewall rules](https://github.com/fistralpro/dev_setup/commit/ed1df6645c137c914b96306e837b3cc0446532ba)
+![intellij firewall rules]([https://github.com/fistralpro/dev_setup/commit/ed1df6645c137c914b96306e837b3cc0446532ba](https://github.com/fistralpro/dev_setup/blob/ed1df6645c137c914b96306e837b3cc0446532ba/firewall%20rules%20for%20intellij.png?raw=true))
 
 ## Optional useful packages
 ```
