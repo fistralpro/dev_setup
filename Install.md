@@ -107,9 +107,14 @@ Performance is terrible while defender scans so I added the following folders to
 ![intellij windows defender rules](https://github.com/fistralpro/dev_setup/blob/main/folder_exclusions.png?raw=true)
 
 
-## Optional useful packages
+## Optional useful packages (develop with temurin-17-jdk-amd64)
 ```
 sudo apt install unzip
+cd ~/dev_setup/scripts
+sudo bash gradle7.sh
+./java17.sh
+sudo bash maven3.sh
+
 ```
 
 ## optional install java 8 on ubuntu
@@ -121,24 +126,6 @@ java -version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 ```
-## optional install java 17 on ubuntu
 
-see scripts/java17.sh
 
-install gradle  
-```
-VERSION=7.5.1
-wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
-sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
-
-sudo vi /etc/profile.d/gradle.sh
-# file contents
-#!
-export GRADLE_HOME=/opt/gradle/latest
-export PATH=${GRADLE_HOME}/bin:${PATH}
-# end of file
-sudo chmod +x /etc/profile.d/gradle.sh
-source /etc/profile.d/gradle.sh
-gradle -v
-```
 
