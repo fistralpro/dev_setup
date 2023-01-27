@@ -18,6 +18,14 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo groupadd docker 
 sudo usermod -aG docker $USER 
 
-echo "service docker start" | sudo tee -a /etc/profile.d/docker.sh
+# 6. WSL2 Kernel do not support nftables causing docker to fail startup 
+# https://github.com/microsoft/WSL/issues/6655
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
-service docker start
+# 7. Autostart
+echo 'if service docker status 2>&1 | grep -q "is not running"; then' | sudo tee -a /etc/profile
+echo '    wsl.exe -d "${WSL_DISTRO_NAME}" -u root -e /usr/sbin/service docker start >/dev/null 2>&1' | sudo tee -a /etc/profile
+echo 'fi' | sudo tee -a /etc/profile
+
+sudo dockerd &
