@@ -99,11 +99,22 @@ chmod 600 ~/.gitconfig
 ## unblock firewall for intellij
 I was unable to get online examples to work, so instead I manually added idea64.ex the rules via windows defender firewall with active security  
 !Warning! Every intellij update changes the path so until you add the new update through the rules... it breaks.  
-![intellij firewall rules](https://github.com/fistralpro/dev_setup/blob/ed1df6645c137c914b96306e837b3cc0446532ba/firewall%20rules%20for%20intellij.png?raw=true))
+![intellij firewall rules](https://github.com/fistralpro/dev_setup/blob/ed1df6645c137c914b96306e837b3cc0446532ba/firewall%20rules%20for%20intellij.png?raw=true)
 
-## Optional useful packages
+## remove folders from windows defender scan 
+Performance is terrible while defender scans so I added the following folders to the exclusion list    
+!Warning! Every intellij update changes the path so until you add the new update through the rules... it breaks.  
+![intellij windows defender rules](https://github.com/fistralpro/dev_setup/blob/main/folder_exclusions.png?raw=true)
+
+
+## Optional useful packages (develop with temurin-17-jdk-amd64)
 ```
 sudo apt install unzip
+cd ~/dev_setup/scripts
+sudo bash gradle7.sh
+./java17.sh
+sudo bash maven3.sh
+
 ```
 
 ## optional install java 8 on ubuntu
@@ -115,24 +126,6 @@ java -version
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 ```
-## optional install java 17 on ubuntu
 
-see scripts/java17.sh
 
-install gradle  
-```
-VERSION=7.5.1
-wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
-sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
-
-sudo vi /etc/profile.d/gradle.sh
-# file contents
-#!
-export GRADLE_HOME=/opt/gradle/latest
-export PATH=${GRADLE_HOME}/bin:${PATH}
-# end of file
-sudo chmod +x /etc/profile.d/gradle.sh
-source /etc/profile.d/gradle.sh
-gradle -v
-```
 
