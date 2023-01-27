@@ -17,3 +17,7 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 # 5. Add user to docker group 
 sudo groupadd docker 
 sudo usermod -aG docker $USER 
+
+echo "service docker start" | sudo tee -a /etc/profile.d/docker.sh
+
+service docker start
