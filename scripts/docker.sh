@@ -24,8 +24,13 @@ sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
 sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 # 7. Autostart
-echo 'if service docker status 2>&1 | grep -q "is not running"; then' | sudo tee -a /etc/profile
-echo '    wsl.exe -d "${WSL_DISTRO_NAME}" -u root -e /usr/sbin/service docker start >/dev/null 2>&1' | sudo tee -a /etc/profile
-echo 'fi' | sudo tee -a /etc/profile
+echo 'if [ -n "`service docker status | grep not`" ]; then' >> ~/.profile
+echo '	    sudo /usr/sbin/service docker start' >> ~.profile
+echo 'fi' >> ~.profile
 
-sudo dockerd &
+# 8. Remove from sudoers (so not prompted for password
+echo "You will need to do this manually"
+echo "    sudo visudo -f /etc/sudoers.d/passwordless_docker_start"
+echo "add the following to the file changing the username appropriately"
+echo "username        ALL = (root) NOPASSWD: /usr/sbin/service docker start"
+

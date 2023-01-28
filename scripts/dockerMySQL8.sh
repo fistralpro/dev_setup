@@ -6,4 +6,4 @@
 VERSION=8.0.32
 docker pull mysql:${VERSION}
 
-echo "docker run --name mysql_wsl2_i1 -d mysql/mysql-server:${VERSION} --character-set-server=utf8mb4 --collation-server=utf8mb4_col"
+echo "docker run --name mysql_wsl2_i1 -d mysql/mysql:${VERSION} --character-set-server=utf8mb4 --collation-server=utf8mb4_col"
