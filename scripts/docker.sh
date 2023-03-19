@@ -12,7 +12,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 
 # 4. Install Docker 
 sudo apt-get update 
-sudo apt-get -y install docker-ce docker-ce-cli containerd.io 
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # 5. Add user to docker group 
 sudo groupadd docker 
