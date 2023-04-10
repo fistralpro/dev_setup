@@ -8,3 +8,9 @@ sudo apt update
 sudo apt -y upgrade
 sudo apt install -y python3-pip
 sudo apt install -y  build-essential libssl-dev libffi-dev python3-dev python3-venv
+
+#Venv instructions
+# mkdir environments
+# cd environments
+# python3 -m venv my_env
+# source my_env/bin/activate
