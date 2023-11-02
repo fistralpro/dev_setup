@@ -1,12 +1,14 @@
-#/bin/bash 
+#!/bin/bash 
 # Ubuntu 20.04 amd64 install of awscli v2
 # run with
-#    bash awscli.sh
+#    sudo bash awscli.sh
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
 unzip -d /tmp /tmp/awscliv2.zip
 
-sudo bash /tmp/aws/install
+chmod +x /tmp/aws/install
+
+bash /tmp/aws/install
 # we can update with 
 #    sudo bash /tmp/aws/install --update
 
