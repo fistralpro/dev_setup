@@ -21,8 +21,6 @@ rm -rf /tmp/awscliv2.zip /tmp/aws
 # login to your aws management console and retrieve your aws access key id and secret access key
 # if it isn't created, create it it
 echo "Now run the command"
-echo "aws configure"
-
-
+echo "aws configure sso --no-browser"
 
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
