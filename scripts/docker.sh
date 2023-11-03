@@ -1,4 +1,4 @@
-#/bin/bash 
+#!/bin/bash 
 
 # 1. Required dependencies 
 sudo apt-get update 
